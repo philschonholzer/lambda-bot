@@ -7,10 +7,13 @@ provider:
 #  stage: dev
   region: eu-central-1
 
+  environment:
+    CLIENT_ID: ${file(local.yml):slack.clientId}
+    CLIENT_SECRET: ${file(local.yml):slack.clientSecret}
+    VERIFICATION_TOKEN: ${file(local.yml):slack.verificationToken}
+
 functions:
-  hello:
-    handler: handler.hello
+  event:
+    handler: handler.event
     events:
-      - http:
-          path: handler/hello
-          method: get
+      - http: POST event
