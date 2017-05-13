@@ -1,0 +1,16 @@
+service: lambda-bot
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+#  stage: dev
+  region: eu-central-1
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: handler/hello
+          method: get
