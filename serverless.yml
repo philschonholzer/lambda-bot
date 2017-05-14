@@ -10,6 +10,7 @@ provider:
   environment:
     CLIENT_ID: ${file(local.yml):slack.clientId}
     CLIENT_SECRET: ${file(local.yml):slack.clientSecret}
+    ACCESS_TOKEN: ${file(local.yml):slack.accessToken}
     VERIFICATION_TOKEN: ${file(local.yml):slack.verificationToken}
 
 functions:
