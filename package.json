@@ -1,0 +1,15 @@
+{
+  "name": "lambda-bot",
+  "version": "0.0.1",
+  "description": "Test bot with aws lambda",
+  "main": "handler.js",
+  "repository": "https://github.com/philschonholzer/lambda-bot",
+  "author": "philschonholzer <philip.schoenholzer@apptiva.ch>",
+  "license": "MIT",
+  "scripts": {
+    "test": "set VERIFICATION_TOKEN=Ha&&./node_modules/.bin/ava"
+  },
+  "devDependencies": {
+    "ava": "^0.19.1"
+  }
+}
