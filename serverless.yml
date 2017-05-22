@@ -4,7 +4,7 @@ provider:
   name: aws
   runtime: nodejs6.10
 
-#  stage: dev
+  stage: dev
   region: eu-central-1
 
   environment:
@@ -13,8 +13,36 @@ provider:
     ACCESS_TOKEN: ${file(local.yml):slack.accessToken}
     VERIFICATION_TOKEN: ${file(local.yml):slack.verificationToken}
 
+    
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: arn:aws:dynamodb:${self:provider.region}:*:*
+
 functions:
   event:
     handler: handler.event
     events:
       - http: POST event
+  install:
+    handler: handler.install
+    events:
+      - http: GET install
+
+resources:
+  Resources:
+    accessTokenTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${opt:stage, self:provider.stage}-accessTokenTable
+        AttributeDefinitions:
+          - AttributeName: teamId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: teamId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

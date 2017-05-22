@@ -11,5 +11,8 @@
   },
   "devDependencies": {
     "ava": "^0.19.1"
+  },
+  "dependencies": {
+    "pug": "^2.0.0-rc.1"
   }
 }

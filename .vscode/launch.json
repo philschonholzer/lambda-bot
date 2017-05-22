@@ -13,7 +13,8 @@
                 "${file}"
             ],
             "env": {
-                "VERIFICATION_TOKEN": "Ha"
+                "VERIFICATION_TOKEN": "Ha",
+                "CLIENT_ID": "client12id34"
             }
         },
         {

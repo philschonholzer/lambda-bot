@@ -1,5 +1,6 @@
 const https = require('https'),
       qs = require('querystring'),
+      pug = require('pug'),
       VERIFICATION_TOKEN = process.env.VERIFICATION_TOKEN,
       ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 
@@ -49,4 +50,16 @@ exports.event = ({body}, context, callback) => {
         case "event_callback": postMessage(data.event, callback); break;
         default: callback(null);
     }
+};
+
+
+module.exports.install = (event, context, callback) => {
+    const body = pug.renderFile('install.pug', {clientId: process.env.CLIENT_ID});
+	callback(null, {
+		statusCode: 200,
+		headers: {
+			'Content-Type': 'text/html'
+		},
+		body: body
+	});
 };
